@@ -1,0 +1,23 @@
+.container {
+  color: white;
+  padding: 20px;
+  padding-right: 0;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.active {
+  background-color: white;
+  color: black;
+  border-top-left-radius: 10px;
+}
