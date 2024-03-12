@@ -1,10 +1,15 @@
 import Link from "next/link";
 import styles from "./nav.module.css";
 import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
 export default function Nav() {
   const router = useRouter();
   const { pathname } = router;
+  async function logout() {
+    await router.push("/");
+    await signOut();
+  }
   return (
     <aside className={styles.container}>
       <Link href={"/"} className="flex gap-2 mb-4 mr-4">
@@ -74,6 +79,30 @@ export default function Nav() {
           Products
         </Link>
         <Link
+          href={"/categories"}
+          className={
+            pathname.includes("/categories")
+              ? `${styles.active} ${styles.item}`
+              : `${styles.item}`
+          }
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          Categories
+        </Link>
+        <Link
           href={"/orders"}
           className={
             pathname.includes("/orders")
@@ -126,6 +155,23 @@ export default function Nav() {
           </svg>
           Settings
         </Link>
+        <button onClick={logout} className={styles.item}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+            />
+          </svg>
+          Logout
+        </button>
       </nav>
     </aside>
   );
